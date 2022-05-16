@@ -9,8 +9,9 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Table(name="movie")
 @Entity
@@ -31,23 +32,27 @@ public class Movie {
 
     @Column(columnDefinition = "text[]")
     @Type(type = "com.returners.movies.util.CustomStringArrayType")
-    private String[] actors;
+    private @NotEmpty(message = "Movie actors' names are mandatory!") String[] actors;
 
     @Column
     private int rating;
 
     @Column
+    @NotBlank(message = "Movie title is mandatory!")
     private String title;
 
     @Column
+    @NotNull(message = "Movie year is mandatory!")
     private int year;
 
     @OneToOne()
     @JoinColumn(name="certification_id")
+    @NotNull(message = "Certification id is mandatory!")
     private Certification certification_id;
 
     @OneToOne()
     @JoinColumn(name="genre_id")
+    @NotNull(message = "Genre id is mandatory!")
     private Genre genre_id;
 
 }
