@@ -1,7 +1,6 @@
 package com.returners.movies.controller;
 
 import com.returners.movies.model.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.returners.movies.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -32,13 +30,9 @@ public class UserControllerTests {
     @Autowired
     private MockMvc mockMvcController;
 
-
-    private ObjectMapper mapper;
-
     @BeforeEach
     public void setup(){
         mockMvcController = MockMvcBuilders.standaloneSetup(userController).build();
-        mapper = new ObjectMapper();
     }
 
     @Test
