@@ -1,8 +1,9 @@
 package com.returners.movies.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import com.returners.movies.model.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
-public interface MovieRepository extends CrudRepository {
+@Repository
+public interface MovieRepository extends JpaRepository<Movie,Long> {
 }

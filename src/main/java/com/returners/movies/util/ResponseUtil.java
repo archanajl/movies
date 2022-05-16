@@ -1,32 +1,32 @@
 package com.returners.movies.util;
 
-import com.returners.movies.model.Response;
+import com.returners.movies.model.DataResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class ResponseUtil {
 
-    public static ResponseEntity<Response> getSuccessResponse(Object data, String message) {
-        Response response = new Response();
+    public static ResponseEntity<DataResponse> getSuccessResponse(Object data, String message) {
+        DataResponse dataResponse = new DataResponse();
         if (message != null) {
-            response.setMessage(message);
+            dataResponse.setMessage(message);
         }
-        response.setStatus("SUCCESS");
-        response.setData(data);
+        dataResponse.setStatus("SUCCESS");
+        dataResponse.setData(data);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(dataResponse);
     }
 
-    public static ResponseEntity<Response> getErrorResponse(HttpStatus status, Object data, String message) {
-        Response response = new Response();
+    public static ResponseEntity<DataResponse> getErrorResponse(HttpStatus status, Object data, String message) {
+        DataResponse dataResponse = new DataResponse();
         if (message != null) {
-            response.setMessage(message);
+            dataResponse.setMessage(message);
         }
-        response.setStatus("ERROR");
-        response.setData(data);
+        dataResponse.setStatus("ERROR");
+        dataResponse.setData(data);
 
         return ResponseEntity
                 .status(status != null ?status : HttpStatus.OK)
-                .body(response);
+                .body(dataResponse);
     }
 }
