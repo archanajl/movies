@@ -33,7 +33,7 @@ public class MovieController {
     public ResponseEntity<DataResponse> addMovie(@RequestBody @Valid Movie movie){
         try{
             Movie newMovie = movieService.addMovie(movie);
-            if(newMovie!=null) return ResponseUtil.getSuccessResponse(newMovie, String.format(Constants.MOVIE_ADDED_SUCCCESSFULLY, movie.getTitle()));
+            if(newMovie!=null) return ResponseUtil.getSuccessResponse(newMovie, String.format(Constants.MOVIE_ADDED_SUCCESSFULLY, movie.getTitle()));
             else throw new MovieAlreadyExistsException(String.format(Constants.MOVIE_ALREADY_EXISTS, movie.getTitle()));
         }catch(MovieAlreadyExistsException e){
             return ResponseUtil.getErrorResponse(HttpStatus.BAD_REQUEST, movie, e.getMessage());
