@@ -8,8 +8,6 @@ import com.returners.movies.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 
 @RestController
@@ -32,6 +30,15 @@ public class MovieController {
         List<Movie> movies = movieService.getMoviesBySearchCriteria(search);
         System.out.println(movies);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
+
+    }
+
+    @PostMapping(
+            value = "/search/{userId}")
+    public ResponseEntity<DataResponse> getMoviesByCriteria(@PathVariable Long userId, @RequestBody SearchCriteria search) {
+        List<Movie> movies = movieService.getMoviesForUserBySearchCriteria(userId,search);
+        System.out.println(movies);
+        return ResponseUtil.getSuccessResponse(movies,"All movies fetched for user " + userId) ;
 
     }
 

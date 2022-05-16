@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping({"/{userId}"})
     public ResponseEntity<DataResponse> getUserById(@PathVariable Long userId){
-        Optional<User> user = userService.findUserById(userId);
+        User user = userService.findUserById(userId);
         System.out.println(user);
         return ResponseUtil.getSuccessResponse(user,"All users fetched") ;
     }

@@ -74,7 +74,7 @@ public class UserControllerTests {
 
         User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626");
 
-        when(mockUserServiceImpl.findUserById(user.getId())).thenReturn(java.util.Optional.of(user));
+        when(mockUserServiceImpl.findUserById(user.getId())).thenReturn(user);
 
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.get("/api/v1/users/" + user.getId()))
