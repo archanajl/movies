@@ -1,5 +1,6 @@
 package com.returners.movies.service;
 
+import com.returners.movies.exception.MovieIdNotFound;
 import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
@@ -33,12 +34,20 @@ public class MovieServiceImpl implements MovieService {
     public Movie addMovie(Movie movie) {
         if(movieRepository.findByTitle(movie.getTitle())!= null) return null;
         else{
-            Genre genre = entityManager.find(Genre.class,movie.getGenre_id().getId());
-            Certification certification = entityManager.find(Certification.class,movie.getCertification_id().getId());
-            movie.setGenre_id(genre);
-            movie.setCertification_id(certification);
+            Genre genre = entityManager.find(Genre.class,movie.getGenre().getId());
+            Certification certification = entityManager.find(Certification.class,movie.getCertification().getId());
+            movie.setGenre(genre);
+            movie.setCertification(certification);
             return movieRepository.save(movie);
         }
+    }
+
+    @Override
+    public void deleteMovie(Long movieId) throws MovieIdNotFound {
+            if (!movieRepository.existsById(movieId)) {
+              throw new MovieIdNotFound();
+            }
+            movieRepository.deleteById(movieId);
     }
 
 }

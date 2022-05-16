@@ -1,6 +1,8 @@
 package com.returners.movies.controller;
 
+import com.returners.movies.constants.Constants;
 import com.returners.movies.exception.MovieAlreadyExistsException;
+import com.returners.movies.exception.MovieIdNotFound;
 import com.returners.movies.model.DataResponse;
 import com.returners.movies.model.Movie;
 import com.returners.movies.service.MovieService;
@@ -14,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/movie")
+@RequestMapping("/movie")
 public class MovieController {
 
     @Autowired
@@ -37,5 +39,16 @@ public class MovieController {
             return ResponseUtil.getErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,movie,e.getMessage());
         }
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{movieId}")
+    public ResponseEntity<DataResponse> deletemovie(@PathVariable("movieId") Long movieId) {
+        try {
+            movieService.deleteMovie(movieId);
+            return ResponseUtil.getSuccessResponse(null, String.format(Constants.DELETED_SUCCESSFULLY, movieId));
+        } catch(MovieIdNotFound e) {
+            return ResponseUtil.getErrorResponse(HttpStatus.NOT_FOUND, null, String.format(Constants.ID_DOES_NOT_EXISTS, movieId));
+        }
+    }
+
 }
 
