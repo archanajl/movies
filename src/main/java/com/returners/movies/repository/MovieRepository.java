@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Long> {
-    //List<Movie> findByActors(List<String> actors);
+    List<Movie> findByActors(String[] actors);
     List<Movie> findByIdOrRatingOrTitleOrYearOrCertificationOrGenre(
             Long id,
             int Rating,

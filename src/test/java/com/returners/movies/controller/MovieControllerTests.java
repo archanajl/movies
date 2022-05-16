@@ -97,7 +97,6 @@ public class MovieControllerTests {
         String jsonString =mapper.writeValueAsString(search);
         when(mockMovieServiceImpl.getMoviesBySearchCriteria(search)).thenReturn(movies);
 
-        System.out.println(jsonString);
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.post("/api/v1/movies/search")
                         .contentType(MediaType.APPLICATION_JSON).content(jsonString))

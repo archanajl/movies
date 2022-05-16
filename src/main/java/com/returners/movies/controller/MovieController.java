@@ -6,12 +6,10 @@ import com.returners.movies.model.SearchCriteria;
 import com.returners.movies.service.MovieService;
 import com.returners.movies.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.awt.print.Book;
 import java.util.List;
 
 @RestController
