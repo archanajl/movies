@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table(name="Users")
+@Table(name="\"user\"")
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue

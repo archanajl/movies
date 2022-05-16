@@ -29,12 +29,9 @@ public class Movie {
     @Column(updatable = false, nullable = false)
     private Long id;
 
-    @Type(type = "list-array")
-    @Column(
-            name = "actors",
-            columnDefinition = "text[]"
-    )
-    private List<String> actors;
+    @Column(columnDefinition = "text[]")
+    @Type(type = "com.returners.movies.util.CustomStringArrayType")
+    private String[] actors;
 
     @Column
     private int rating;
@@ -45,23 +42,12 @@ public class Movie {
     @Column
     private int year;
 
-    @Column
-    private int certification_id;
+    @OneToOne()
+    @JoinColumn(name="certification_id")
+    private Certification certification_id;
 
-    @Column
-    private int genre_id;
+    @OneToOne()
+    @JoinColumn(name="genre_id")
+    private Genre genre_id;
 
-
-//    @Override
-//    public String toString() {
-//        return "Movie{" +
-//                "id=" + id +
-//                ", actors=" + Arrays.toString(actors) +
-//                ", rating=" + rating +
-//                ", title='" + title + '\'' +
-//                ", year=" + year +
-//                ", certification=" + certification +
-//                ", genre=" + genre +
-//                '}';
-//    }
 }

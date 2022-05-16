@@ -1,6 +1,8 @@
 package com.returners.movies.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.returners.movies.model.Certification;
+import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 import com.returners.movies.service.MovieServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,27 +49,27 @@ public class MovieControllerTests {
     public void testGetAllMoviesReturnsMovies() throws Exception {
 
         List<Movie> movies = new ArrayList<>();
-        List<String> actors = Arrays.asList(new String[]{"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"});
-        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, 4, 9);
+        String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
+        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
         movies.add(movie);
-        actors = Arrays.asList(new String[]{"Tim Robbins","Morgan Freeman","Bob Gunton"});
-        movie= new Movie(2L, actors, 9, "The Shawshank Redemption", 1994, 8, 9);
+        actors = new String[]{"Tim Robbins","Morgan Freeman","Bob Gunton"};
+        movie= new Movie(2L, actors, 9, "The Shawshank Redemption", 1994, new Certification(8L,"R"), new Genre(3L,"Comedy"));
         movies.add(movie);
-        actors = Arrays.asList(new String[]{"Jack Nicholson","Morgan Freeman","Sean Hayes"});
-        movie = new Movie(3L, actors, 7, "The Bucket List", 2007, 4, 3);
+        actors = new String[]{"Jack Nicholson", "Morgan Freeman", "Sean Hayes"};
+        movie = new Movie(3L, actors, 7, "The Bucket List", 2007, new Certification(4L,"12A"), new Genre(4L,"Horror"));
         movies.add(movie);
 
         when(mockMovieServiceImpl.getAllMovies()).thenReturn(movies);
 
         this.mockMvcController.perform(
             MockMvcRequestBuilders.get("/api/v1/movie/"))
-            .andExpect(MockMvcResultMatchers.status().isOk());
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").value("The Duchess"))
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[1].id").value(2))
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[1].title").value("The Shawshank Redemption"))
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[2].id").value(3))
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[2].title").value("The Bucket List"));
-    }
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(1))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("The Duchess"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].id").value(2))
+           .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].title").value("The Shawshank Redemption"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].id").value(3))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].title").value("The Bucket List"));
+  }
 
 }

@@ -22,4 +22,10 @@ public class MovieServiceImpl implements MovieService {
         return movies;
     }
 
+    @Override
+    public Movie insertMovie(Movie movie) {
+        return movieRepository.save(movie);
+
+    }
+
 }

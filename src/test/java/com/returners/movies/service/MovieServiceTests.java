@@ -1,7 +1,10 @@
 package com.returners.movies.service;
 
+import com.returners.movies.model.Certification;
+import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 import com.returners.movies.repository.MovieRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,16 +31,15 @@ public class MovieServiceTests {
     public void testGetAllMoviesReturnsListOfMovies() {
 
         List<Movie> movies = new ArrayList<>();
-        List<String> actors = Arrays.asList(new String[]{"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"});
-        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, 4, 9);
+        String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
+        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
         movies.add(movie);
-        actors = Arrays.asList(new String[]{"Tim Robbins","Morgan Freeman","Bob Gunton"});
-        movie= new Movie(2L, actors, 9, "The Shawshank Redemption", 1994, 8, 9);
+        actors = new String[]{"Tim Robbins","Morgan Freeman","Bob Gunton"};
+        movie= new Movie(2L, actors, 9, "The Shawshank Redemption", 1994, new Certification(8L,"R"), new Genre(3L,"Comedy"));
         movies.add(movie);
-        actors = Arrays.asList(new String[]{"Jack Nicholson","Morgan Freeman","Sean Hayes"});
-        movie = new Movie(3L, actors, 7, "The Bucket List", 2007, 4, 3);
+        actors = new String[]{"Jack Nicholson", "Morgan Freeman", "Sean Hayes"};
+        movie = new Movie(3L, actors, 7, "The Bucket List", 2007, new Certification(4L,"12A"), new Genre(4L,"Horror"));
         movies.add(movie);
-
         when(mockMovieRepository.findAll()).thenReturn(movies);
 
         List<Movie> actualResult = movieServiceImpl.getAllMovies();

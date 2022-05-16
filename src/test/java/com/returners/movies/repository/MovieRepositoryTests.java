@@ -1,10 +1,16 @@
 package com.returners.movies.repository;
 
+import com.returners.movies.model.Certification;
+import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,12 +22,16 @@ public class MovieRepositoryTests {
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private TestEntityManager entityManager;
+
     @Test
     public void testFindAllMovies() {
 
-        List<String> actors = Arrays.asList(new String[]{"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"});
-        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, 4, 3);
-        movieRepository.save(movie);
+        String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
+        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
+        entityManager.persist(movie);
+        //movieRepository.save(movie);
 
         Iterable<Movie> movies = movieRepository.findAll();
         assertThat(movies).hasSize(1);
