@@ -48,11 +48,11 @@ public class Movie {
     @OneToOne()
     @JoinColumn(name="certification_id")
     @NotNull(message = "Certification id is mandatory!")
-    private Certification certification_id;
+    private Certification certification;
 
     @OneToOne()
     @JoinColumn(name="genre_id")
     @NotNull(message = "Genre id is mandatory!")
-    private Genre genre_id;
+    private Genre genre;
 
 }
