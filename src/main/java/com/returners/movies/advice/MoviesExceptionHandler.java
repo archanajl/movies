@@ -28,5 +28,5 @@ public class MoviesExceptionHandler{
     @ExceptionHandler(value = NoSuchUserExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<DataResponse> handleNoSuchUserException(NoSuchUserExistsException ex){
-        return ResponseUtil.getErrorResponse(HttpStatus.CONFLICT, null, ex.getMessage());}
+        return ResponseUtil.getErrorResponse(HttpStatus.NOT_FOUND, null, ex.getMessage());}
 }
