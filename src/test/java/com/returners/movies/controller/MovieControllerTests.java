@@ -12,13 +12,13 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -71,5 +71,19 @@ public class MovieControllerTests {
             .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].id").value(3))
             .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].title").value("The Bucket List"));
   }
+
+    @Test
+    public void testPostMappingAddAMovie() throws Exception {
+        Movie movie = new Movie(1L, new String[]{"Keira Knightley","Ralph Fiennes","Dominic Cooper"}, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
+        when(mockMovieServiceImpl.addMovie(movie)).thenReturn(movie);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.post("/api/v1/movie/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(movie)))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(mockMovieServiceImpl, times(1)).addMovie(movie);
+    }
 
 }

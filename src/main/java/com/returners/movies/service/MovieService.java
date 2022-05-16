@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MovieService {
     List<Movie> getAllMovies();
-    Movie insertMovie(Movie movie);
+    Movie addMovie(Movie movie);
 }
