@@ -9,7 +9,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
 
 @Table(name="movie")
@@ -43,11 +42,12 @@ public class Movie {
     private int year;
 
     @OneToOne()
-    @JoinColumn(name="certification_id")
-    private Certification certification_id;
+    @JoinColumn(name="certificationId")
+    private Certification certification;
+
 
     @OneToOne()
-    @JoinColumn(name="genre_id")
-    private Genre genre_id;
+    @JoinColumn(name="genreId")
+    private Genre genre;
 
 }
