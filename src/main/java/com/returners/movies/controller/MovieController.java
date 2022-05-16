@@ -49,8 +49,5 @@ public class MovieController {
             return ResponseUtil.getErrorResponse(HttpStatus.NOT_FOUND, null, String.format(Constants.ID_DOES_NOT_EXISTS, movieId));
         }
     }
-
-
-
 }
 
