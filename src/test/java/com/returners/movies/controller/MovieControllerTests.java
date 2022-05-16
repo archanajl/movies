@@ -1,6 +1,7 @@
 package com.returners.movies.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.returners.movies.constants.Constants;
 import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
@@ -62,7 +63,7 @@ public class MovieControllerTests {
         when(mockMovieServiceImpl.getAllMovies()).thenReturn(movies);
 
         this.mockMvcController.perform(
-            MockMvcRequestBuilders.get("/api/v1/movie/"))
+            MockMvcRequestBuilders.get("/movie/"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(1))
             .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("The Duchess"))
@@ -78,12 +79,26 @@ public class MovieControllerTests {
         when(mockMovieServiceImpl.addMovie(movie)).thenReturn(movie);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/api/v1/movie/add")
+                        MockMvcRequestBuilders.post("/movie/add")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         verify(mockMovieServiceImpl, times(1)).addMovie(movie);
+    }
+
+    @Test
+    public void testDeleteAPIWhenIDExists() throws Exception {
+        mockMvcController.perform(MockMvcRequestBuilders.delete("/movie/{movieId}", 5))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.DELETED_SUCCESSFULLY, 5)));
+    }
+
+    @Test
+    public void testDeleteAPIWhenIDDoesNotExists() throws Exception {
+        mockMvcController.perform(MockMvcRequestBuilders.delete("/movie/{movieId}", 5))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.ID_DOES_NOT_EXISTS, 5)));
     }
 
 }

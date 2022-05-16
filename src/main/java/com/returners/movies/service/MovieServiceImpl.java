@@ -1,5 +1,6 @@
 package com.returners.movies.service;
 
+import com.returners.movies.exception.MovieIdNotFound;
 import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
@@ -39,6 +40,14 @@ public class MovieServiceImpl implements MovieService {
             movie.setCertification_id(certification);
             return movieRepository.save(movie);
         }
+    }
+
+    @Override
+    public void deleteMovie(Long movieId) throws MovieIdNotFound {
+            if (!movieRepository.existsById(movieId)) {
+              throw new MovieIdNotFound();
+            }
+            movieRepository.deleteById(movieId);
     }
 
 }

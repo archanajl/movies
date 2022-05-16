@@ -1,21 +1,21 @@
 package com.returners.movies.service;
 
+import com.returners.movies.exception.MovieIdNotFound;
 import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 import com.returners.movies.repository.MovieRepository;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @DataJpaTest
@@ -46,6 +46,20 @@ public class MovieServiceTests {
 
         assertThat(actualResult).hasSize(3);
         assertThat(actualResult).isEqualTo(movies);
+    }
+
+    @Test
+    public void testDeleteMovieWhenIdExists() {
+        when(mockMovieRepository.existsById(5L)).thenReturn(true);
+        movieServiceImpl.deleteMovie(5L);
+        verify(mockMovieRepository, times(1)).deleteById(any());
+    }
+
+    @Test
+    public void testDeleteMovieWhenIdDoesNotExists() {
+        when(mockMovieRepository.existsById(5L)).thenReturn(false);
+        assertThrows(MovieIdNotFound.class, () -> movieServiceImpl.deleteMovie(5L));
+        verify(mockMovieRepository, times(0)).deleteById(any());
     }
 
 }
