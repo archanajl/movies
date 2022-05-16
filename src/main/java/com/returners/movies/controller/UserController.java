@@ -15,7 +15,7 @@ public class UserController {
     UserService userService;
 
     @DeleteMapping({"/delete/{userId}"})
-    public ResponseEntity<DataResponse> deleteBookById(@PathVariable("userId") Long userId) throws NoSuchUserExistsException {
+    public ResponseEntity<DataResponse> deleteUserById(@PathVariable("userId") Long userId) throws NoSuchUserExistsException {
         if(userService.deleteUserById(userId)) return ResponseUtil.getSuccessResponse(null, "User " + userId + " is deleted!");
         else throw new NoSuchUserExistsException("Sorry User "+ userId +" does not exist and therefore cannot be deleted!!");
     }
