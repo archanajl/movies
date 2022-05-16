@@ -37,10 +37,5 @@ public class MovieController {
             return ResponseUtil.getErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,movie,e.getMessage());
         }
     }
-
-
-
-
-
 }
 
