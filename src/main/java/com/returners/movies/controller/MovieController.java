@@ -45,7 +45,8 @@ public class MovieController {
 
     }
 
-    @PostMapping(value = "/add")
+
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<DataResponse> addMovie(@RequestBody @Valid Movie movie){
         try{
             Movie newMovie = movieService.addMovie(movie);
