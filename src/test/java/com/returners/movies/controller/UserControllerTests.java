@@ -1,8 +1,6 @@
 package com.returners.movies.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.returners.movies.model.*;
-import com.returners.movies.service.MovieServiceImpl;
 import com.returners.movies.model.User;
 import com.returners.movies.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +10,6 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,10 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
