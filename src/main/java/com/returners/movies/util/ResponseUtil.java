@@ -22,7 +22,7 @@ public class ResponseUtil {
         if (message != null) {
             dataResponse.setMessage(message);
         }
-        dataResponse.setStatus("ERROR");
+        dataResponse.setStatus(status.toString());
         dataResponse.setData(data);
 
         return ResponseEntity

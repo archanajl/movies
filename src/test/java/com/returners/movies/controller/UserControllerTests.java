@@ -3,6 +3,7 @@ package com.returners.movies.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.returners.movies.model.*;
 import com.returners.movies.service.MovieServiceImpl;
+import com.returners.movies.model.User;
 import com.returners.movies.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -22,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -83,5 +87,13 @@ public class UserControllerTests {
                         .andExpect(MockMvcResultMatchers.jsonPath("$.data.name").value("Paul"));
     }
 
-}
+    @Test
+    public void testDeleteMappingDeleteAUser() throws Exception {
+        Long id = 1L;
+        User user = new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636");
+        when(mockUserServiceImpl.deleteUserById(id)).thenReturn(true);
+        ResultActions response = this.mockMvcController.perform( MockMvcRequestBuilders.delete("/api/v1/user/delete/" + id));
+        response.andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
+}

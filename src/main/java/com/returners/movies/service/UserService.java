@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface UserService {
     User findUserById(Long id);
     List<User> getAllUsers();
+    boolean deleteUserById(Long id);
 }

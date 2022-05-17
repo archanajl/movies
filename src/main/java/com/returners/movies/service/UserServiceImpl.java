@@ -9,12 +9,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
 
     @Override
+    public boolean deleteUserById(Long id) {
+        if(userRepository.existsById(id)){
+            User user = userRepository.findById(id).get();
+            userRepository.delete(user);
+            return true;
+        }
+        else return false;
+    }
     public User findUserById(Long id) {
         return userRepository.findById(id).get();
     }
@@ -24,6 +32,5 @@ public class UserServiceImpl implements UserService{
         List<User> users = userRepository.findAll();
         return users;
     }
-
 
 }
