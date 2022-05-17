@@ -7,7 +7,7 @@ public class SearchCriteria {
 
     private Long id;
 
-    private List<String> actors;
+    private String actors;
 
     private int rating;
 
@@ -26,7 +26,7 @@ public class SearchCriteria {
         return id;
     }
 
-    public List<String> getActors() {
+    public String getActors() {
         return actors;
     }
 
@@ -53,7 +53,7 @@ public class SearchCriteria {
     public SearchCriteria() {
     }
 
-    public SearchCriteria(Long id, List<String> actors, int rating, String title, int year, Long certificationId, Long genreId) {
+    public SearchCriteria(Long id, String actors, int rating, String title, int year, Long certificationId, Long genreId) {
         this.id = id;
         this.actors = actors;
         this.rating = rating;
@@ -67,7 +67,7 @@ public class SearchCriteria {
         this.id = id;
     }
 
-    public void setActors(List<String> actors) {
+    public void setActors(String actors) {
         this.actors = actors;
     }
 

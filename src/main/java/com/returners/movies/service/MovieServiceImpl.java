@@ -52,9 +52,10 @@ public class MovieServiceImpl implements MovieService {
         if (search.getGenreId() != null) {
             genre = genreRepository.findById(search.getGenreId());
         }
-        return movieRepository.findByIdOrRatingOrTitleOrYearOrCertificationOrGenre(
+        return movieRepository.findBySearchCriteria(
                 search.getId(),
                 search.getRating(),
+                //search.getActors(),
                 search.getTitle(),
                 search.getYear(),
                 cert,
@@ -71,6 +72,7 @@ public class MovieServiceImpl implements MovieService {
         if (search.getCertificationId() != null) {
             cert = certificationRepository.findById(search.getCertificationId());
         }
+        System.out.println(cert);
         if (search.getGenreId() != null) {
             genre = genreRepository.findById(search.getGenreId());
         }

@@ -10,6 +10,8 @@ import java.util.List;
 public interface CertificationRepository extends JpaRepository<Certification,Long> {
     Certification findByName(String name);
 
+    //Certification findById(Long id);
+
     @Query( "select id from Certification c where c.name IN :names" )
     List<Long> findByNames(@Param("names") List<String> certificationNameList);
 
