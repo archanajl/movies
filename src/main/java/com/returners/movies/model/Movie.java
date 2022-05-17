@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Table(name="movie")
 @Entity
@@ -46,13 +47,19 @@ public class Movie {
     private int year;
 
     @OneToOne()
-    @JoinColumn(name="certification_id")
+    @JoinColumn(name="certificationId",
+    referencedColumnName = "id",
+    insertable = false,updatable = false)
     @NotNull(message = "Certification id is mandatory!")
     private Certification certification;
 
+
     @OneToOne()
-    @JoinColumn(name="genre_id")
+    @JoinColumn(name="genreId",
+            referencedColumnName = "id",
+            insertable = false,updatable = false)
     @NotNull(message = "Genre id is mandatory!")
     private Genre genre;
+
 
 }

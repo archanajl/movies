@@ -5,6 +5,7 @@ import com.returners.movies.exception.MovieAlreadyExistsException;
 import com.returners.movies.exception.MovieIdNotFoundException;
 import com.returners.movies.model.DataResponse;
 import com.returners.movies.model.Movie;
+import com.returners.movies.model.SearchCriteria;
 import com.returners.movies.service.MovieService;
 import com.returners.movies.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class MovieController {
 
     @Autowired
@@ -25,7 +26,28 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<DataResponse> getAllMovies(){
         List<Movie> movies = movieService.getAllMovies();
-        System.out.println(movies);
+        return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
+    }
+
+    @PostMapping(
+            value = "/search")
+    public ResponseEntity<DataResponse> getMoviesByCriteria(@RequestBody SearchCriteria search) {
+        List<Movie> movies = movieService.getMoviesBySearchCriteria(search);
+        return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
+
+    }
+
+    @PostMapping(
+            value = "/search/{userId}")
+    public ResponseEntity<DataResponse> getMoviesByCriteria(@PathVariable Long userId, @RequestBody SearchCriteria search) {
+        List<Movie> movies = movieService.getMoviesForUserBySearchCriteria(userId,search);
+        return ResponseUtil.getSuccessResponse(movies,"All movies fetched for user " + userId) ;
+
+    }
+
+    @GetMapping({"/search/{actor}"})
+    public ResponseEntity<DataResponse> getMoviesByActor(@PathVariable String actor){
+        List<Movie> movies = movieService.getMoviesByActors(actor);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
     }
 

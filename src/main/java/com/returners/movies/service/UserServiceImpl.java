@@ -24,6 +24,9 @@ public class UserServiceImpl implements UserService {
         }
         else return false;
     }
+    public User findUserById(Long id) {
+        return userRepository.findById(id).get();
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -31,6 +34,8 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+
+    
     @Override
     public void addUser(User user) throws UserAlreadyExistsException {
         List<User> usersList = getAllUsers();
