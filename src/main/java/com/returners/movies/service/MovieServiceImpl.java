@@ -34,10 +34,10 @@ public class MovieServiceImpl implements MovieService {
     public Movie addMovie(Movie movie) {
         if(movieRepository.findByTitle(movie.getTitle())!= null) return null;
         else{
-            Genre genre = entityManager.find(Genre.class,movie.getGenre_id().getId());
-            Certification certification = entityManager.find(Certification.class,movie.getCertification_id().getId());
-            movie.setGenre_id(genre);
-            movie.setCertification_id(certification);
+            Genre genre = entityManager.find(Genre.class,movie.getGenre().getId());
+            Certification certification = entityManager.find(Certification.class,movie.getCertification().getId());
+            movie.setGenre(genre);
+            movie.setCertification(certification);
             return movieRepository.save(movie);
         }
     }
