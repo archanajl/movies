@@ -10,4 +10,5 @@ public interface MovieService {
     Movie insertMovie(Movie movie);
     List<Movie> getMoviesBySearchCriteria(SearchCriteria search);
     List<Movie> getMoviesForUserBySearchCriteria(Long userId,SearchCriteria search);
+    List<Movie> getMoviesByActors(String actor);
 }

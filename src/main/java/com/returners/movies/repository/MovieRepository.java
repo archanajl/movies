@@ -10,25 +10,31 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Long> {
-    List<Movie> findByActors(String[] actors);
-    List<Movie> findByIdOrRatingOrTitleOrYearOrCertificationOrGenre(
+    @Query("select m from Movie m " +
+            "where :actor IN m.actors ")
+            //"where m.actors @> '{Emma Stone}'::text[] ")
+    List<Movie> findByActors( @Param("actor")String actor);
+
+    List<Movie> findByIdOrRatingOrTitleOrYearOrCertificationIdOrGenreId(
             Long id,
-            int Rating,
+            int rating,
             String title,
             int year,
-            Optional<Certification> cert,
-            Optional<Genre> genre
+            Long certificationId,
+            Long genreId
                 );
 
-    @Query( "select m from Movie m where m.id = :id or m.rating = :rating " +
+    @Query( "select m from Movie m " +
+            "INNER JOIN Certification c " +
+            "INNER JOIN Genre g "+
+            "where m.id = :id or m.rating = :rating " +
                 //"or m.actors @> '{Emma Stone}'::text[] " +
                 "or m.title = :title or m.year = :year " +
-               "or m.certification = :cert " +
-               "or m.genre = :genre"
+               "or c.id = :certificationId " +
+               "or g.id = :genreId"
     )
     List<Movie> findBySearchCriteria(
             @Param("id") Long id,
@@ -36,7 +42,7 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
             //@Param("actors") String actors,
             @Param("title") String title,
             @Param("year") int year,
-            @Param("cert") Optional<Certification> cert,
-            @Param("genre") Optional<Genre> genre
+            @Param("certificationId") Long certificationId,
+            @Param("genreId") Long genreId
     );
 }

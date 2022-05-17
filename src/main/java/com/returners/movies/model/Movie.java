@@ -42,12 +42,16 @@ public class Movie {
     private int year;
 
     @OneToOne()
-    @JoinColumn(name="certification_id")
+    @JoinColumn(name="certificationId",
+    referencedColumnName = "id",
+    insertable = false,updatable = false)
     private Certification certification;
 
 
     @OneToOne()
-    @JoinColumn(name="genre_id")
+    @JoinColumn(name="genreId",
+            referencedColumnName = "id",
+            insertable = false,updatable = false)
     private Genre genre;
 
 }

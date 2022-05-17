@@ -35,6 +35,7 @@ public class MovieServiceImpl implements MovieService {
         return movies;
     }
 
+
     @Override
     public Movie insertMovie(Movie movie) {
         return movieRepository.save(movie);
@@ -52,15 +53,15 @@ public class MovieServiceImpl implements MovieService {
         if (search.getGenreId() != null) {
             genre = genreRepository.findById(search.getGenreId());
         }
-        return movieRepository.findBySearchCriteria(
+        return movieRepository.findByIdOrRatingOrTitleOrYearOrCertificationIdOrGenreId(
                 search.getId(),
                 search.getRating(),
-                //search.getActors(),
                 search.getTitle(),
                 search.getYear(),
-                cert,
-                genre
+                search.getCertificationId(),
+                search.getGenreId()
         );
+
     }
 
     @Override
@@ -76,14 +77,20 @@ public class MovieServiceImpl implements MovieService {
         if (search.getGenreId() != null) {
             genre = genreRepository.findById(search.getGenreId());
         }
-        return movieRepository.findByIdOrRatingOrTitleOrYearOrCertificationOrGenre(
+        return movieRepository.findBySearchCriteria(
                 search.getId(),
                 search.getRating(),
+                //search.getActors(),
                 search.getTitle(),
                 search.getYear(),
-                cert,
-                genre
+                search.getCertificationId(),
+                search.getGenreId()
         );
+    }
+
+    @Override
+    public List<Movie> getMoviesByActors(String actor) {
+        return movieRepository.findByActors(actor);
     }
 
     public List<Long> getCertificationList(Long userId){
