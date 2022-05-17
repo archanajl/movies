@@ -23,13 +23,13 @@ public class MovieRepositoryTests {
     @Test
     public void testFindAllMovies() {
 
-//        String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
-//        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
-//        entityManager.persist(movie);
-//        //movieRepository.save(movie);
-//
-//        Iterable<Movie> movies = movieRepository.findAll();
-//        assertThat(movies).hasSize(1);
+        String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
+        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
+        entityManager.persist(movie);
+        //movieRepository.save(movie);
+
+        Iterable<Movie> movies = movieRepository.findAll();
+        assertThat(movies).hasSize(1);
 
     }
 
