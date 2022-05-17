@@ -9,6 +9,7 @@ import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 import com.returners.movies.repository.MovieRepository;
 import com.returners.movies.repository.UserRepository;
+import io.micrometer.core.instrument.search.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,15 +66,29 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getMoviesBySearchCriteria(SearchCriteria search){
-
-        return movieRepository.findByIdOrRatingOrTitleOrYearOrCertificationIdOrGenreId(
-                search.getId(),
-                search.getRating(),
-                search.getTitle(),
-                search.getYear(),
-                search.getCertificationId(),
-                search.getGenreId()
-        );
+        if (search.getId() == null && search.getRating() == 0  && search.getActors() == null && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
+            return movieRepository.findAll();
+        }else {
+            if (search.getActors() == null)
+                return movieRepository.findBySearchCriteriaWithoutActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getTitle(),
+                        search.getYear(),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
+            else
+                return movieRepository.findBySearchCriteriaWithActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getActors(),
+                        search.getTitle(),
+                        search.getYear(),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
+        }
 
     }
 
@@ -81,21 +96,31 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getMoviesForUserBySearchCriteria(Long userId,SearchCriteria search){
 
         List<Long> certList = getCertificationList(userId);
-
-        return movieRepository.findBySearchCriteria(
-                search.getId(),
-                search.getRating(),
-                //search.getActors(),
-                search.getTitle(),
-                search.getYear(),
-                certList.toArray(new Long[certList.size()]),
-                search.getGenreId()
-        );
-    }
-
-    @Override
-    public List<Movie> getMoviesByActors(String actor) {
-        return movieRepository.findByActors(actor);
+        if (search.getId() == null && search.getRating() == 0  && search.getActors() == null && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
+            return movieRepository.findAllForUser(certList.toArray(new Long[certList.size()]));
+        }else {
+            if (search.getActors() == null)
+                return movieRepository.findBySearchCriteriaForUserWithoutActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getTitle(),
+                        search.getYear(),
+                        certList.toArray(new Long[certList.size()]),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
+            else
+                return movieRepository.findBySearchCriteriaForUserWithActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getActors(),
+                        search.getTitle(),
+                        search.getYear(),
+                        certList.toArray(new Long[certList.size()]),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
+        }
     }
 
     public List<Long> getCertificationList(Long userId){

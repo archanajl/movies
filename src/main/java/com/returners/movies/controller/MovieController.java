@@ -45,12 +45,6 @@ public class MovieController {
 
     }
 
-    @GetMapping({"/search/{actor}"})
-    public ResponseEntity<DataResponse> getMoviesByActor(@PathVariable String actor){
-        List<Movie> movies = movieService.getMoviesByActors(actor);
-        return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
-    }
-
     @PostMapping(value = "/add")
     public ResponseEntity<DataResponse> addMovie(@RequestBody @Valid Movie movie){
         try{
