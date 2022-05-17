@@ -42,9 +42,7 @@ public class UserControllerTests {
         mapper = new ObjectMapper();
     }
 
-    @Test
-    public void testGetAllUsersReturnsUsers() throws Exception {
-
+    public List<User> initializeUsers(){
         List<User> users = new ArrayList<>();
         User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626");
         users.add(user);
@@ -52,10 +50,17 @@ public class UserControllerTests {
         users.add(user);
         user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626");
         users.add(user);
+        return users;
+    }
+
+    @Test
+    public void testGetAllUsersReturnsUsers() throws Exception {
+
+        List<User> users = initializeUsers();
         when(mockUserServiceImpl.getAllUsers()).thenReturn(users);
 
         this.mockMvcController.perform(
-                MockMvcRequestBuilders.get("/api/v1/users/"))
+                MockMvcRequestBuilders.get("/users/"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].name").value("Paul"))
@@ -74,7 +79,7 @@ public class UserControllerTests {
         when(mockUserServiceImpl.findUserById(user.getId())).thenReturn(user);
 
         this.mockMvcController.perform(
-                MockMvcRequestBuilders.get("/api/v1/users/" + user.getId()))
+                MockMvcRequestBuilders.get("/users/" + user.getId()))
                         .andExpect(MockMvcResultMatchers.status().isOk())
                         .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(1L))
                         .andExpect(MockMvcResultMatchers.jsonPath("$.data.name").value("Paul"));
@@ -85,7 +90,7 @@ public class UserControllerTests {
         Long id = 1L;
         User user = new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636");
         when(mockUserServiceImpl.deleteUserById(id)).thenReturn(true);
-        ResultActions response = this.mockMvcController.perform( MockMvcRequestBuilders.delete("/api/v1/user/delete/" + id));
+        ResultActions response = this.mockMvcController.perform( MockMvcRequestBuilders.delete("/users/delete/" + id));
         response.andExpect(MockMvcResultMatchers.status().isOk());
     }
 

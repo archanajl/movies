@@ -47,9 +47,7 @@ public class MovieControllerTests {
         mapper = new ObjectMapper();
     }
 
-    @Test
-    public void testGetAllMoviesReturnsMovies() throws Exception {
-
+    public List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
         String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
         Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
@@ -60,11 +58,18 @@ public class MovieControllerTests {
         actors = new String[]{"Jack Nicholson", "Morgan Freeman", "Sean Hayes"};
         movie = new Movie(3L, actors, 7, "The Bucket List", 2007, new Certification(4L,"12A"), new Genre(4L,"Horror"));
         movies.add(movie);
+        return movies;
+    }
+
+    @Test
+    public void testGetAllMoviesReturnsMovies() throws Exception {
+
+        List<Movie> movies = initializeMovies();
 
         when(mockMovieServiceImpl.getAllMovies()).thenReturn(movies);
 
         this.mockMvcController.perform(
-            MockMvcRequestBuilders.get("/api/v1/movies/"))
+            MockMvcRequestBuilders.get("/movies/"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].id").value(1))
             .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("The Duchess"))
@@ -77,16 +82,7 @@ public class MovieControllerTests {
     @Test
     public void testGetMoviesBySearch() throws Exception {
 
-        List<Movie> movies = new ArrayList<>();
-        String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};
-        Movie movie = new Movie(1L, actors, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
-        movies.add(movie);
-        actors = new String[]{"Tim Robbins","Morgan Freeman","Bob Gunton"};
-        movie= new Movie(2L, actors, 9, "The Shawshank Redemption", 1994, new Certification(8L,"R"), new Genre(3L,"Comedy"));
-        movies.add(movie);
-        actors = new String[]{"Jack Nicholson", "Morgan Freeman", "Sean Hayes"};
-        movie = new Movie(3L, actors, 7, "The Bucket List", 2007, new Certification(4L,"12A"), new Genre(4L,"Horror"));
-        movies.add(movie);
+        List<Movie> movies = initializeMovies();
 
         SearchCriteria search = new SearchCriteria();
         search.setId(1L);
@@ -98,7 +94,7 @@ public class MovieControllerTests {
         when(mockMovieServiceImpl.getMoviesBySearchCriteria(search)).thenReturn(movies);
 
         this.mockMvcController.perform(
-                MockMvcRequestBuilders.post("/api/v1/movies/search")
+                MockMvcRequestBuilders.post("/movies/search")
                         .contentType(MediaType.APPLICATION_JSON).content(jsonString))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -110,7 +106,7 @@ public class MovieControllerTests {
         when(mockMovieServiceImpl.addMovie(movie)).thenReturn(movie);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/movie/add")
+                        MockMvcRequestBuilders.post("/movies/add")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -120,14 +116,14 @@ public class MovieControllerTests {
 
     @Test
     public void testDeleteAPIWhenIDExists() throws Exception {
-        mockMvcController.perform(MockMvcRequestBuilders.delete("/movie/{movieId}", 5))
+        mockMvcController.perform(MockMvcRequestBuilders.delete("/movies/{movieId}", 5))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.DELETED_SUCCESSFULLY, 5)));
     }
 
     @Test
     public void testDeleteAPIWhenIDDoesNotExists() throws Exception {
-        mockMvcController.perform(MockMvcRequestBuilders.delete("/movie/{movieId}", 5))
+        mockMvcController.perform(MockMvcRequestBuilders.delete("/movies/{movieId}", 5))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.ID_DOES_NOT_EXISTS, 5)));
     }
