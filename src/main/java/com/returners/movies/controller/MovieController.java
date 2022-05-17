@@ -32,9 +32,7 @@ public class MovieController {
     @PostMapping(
             value = "/search")
     public ResponseEntity<DataResponse> getMoviesByCriteria(@RequestBody SearchCriteria search) {
-        System.out.println("here");
         List<Movie> movies = movieService.getMoviesBySearchCriteria(search);
-        System.out.println(movies);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
 
     }
@@ -45,12 +43,6 @@ public class MovieController {
         List<Movie> movies = movieService.getMoviesForUserBySearchCriteria(userId,search);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched for user " + userId) ;
 
-    }
-
-    @GetMapping({"/search/actor/{actor}"})
-    public ResponseEntity<DataResponse> getMoviesByActor(@PathVariable String actor){
-        List<Movie> movies = movieService.getMoviesByActors(actor);
-        return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
     }
 
     @PostMapping(value = "/add")

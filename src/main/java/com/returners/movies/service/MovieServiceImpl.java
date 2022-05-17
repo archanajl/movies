@@ -66,17 +66,28 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getMoviesBySearchCriteria(SearchCriteria search){
-        if (search.getId() == null && search.getRating() == 0  && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
+        if (search.getId() == null && search.getRating() == 0  && search.getActors() == null && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
             return movieRepository.findAll();
         }else {
-            return movieRepository.findByIdOrRatingOrTitleOrYearOrCertificationIdOrGenreId(
-                    search.getId(),
-                    search.getRating(),
-                    search.getTitle(),
-                    search.getYear(),
-                    search.getCertificationId(),
-                    search.getGenreId()
-            );
+            if (search.getActors() == null)
+                return movieRepository.findBySearchCriteriaWithoutActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getTitle(),
+                        search.getYear(),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
+            else
+                return movieRepository.findBySearchCriteriaWithActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getActors(),
+                        search.getTitle(),
+                        search.getYear(),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
         }
 
     }
@@ -88,22 +99,28 @@ public class MovieServiceImpl implements MovieService {
         if (search.getId() == null && search.getRating() == 0  && search.getActors() == null && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
             return movieRepository.findAllForUser(certList.toArray(new Long[certList.size()]));
         }else {
-            return movieRepository.findBySearchCriteriaForUser(
-                    search.getId(),
-                    search.getRating(),
-                    search.getActors(),
-                    search.getTitle(),
-                    search.getYear(),
-                    certList.toArray(new Long[certList.size()]),
-                    search.getCertificationId(),
-                    search.getGenreId()
-            );
+            if (search.getActors() == null)
+                return movieRepository.findBySearchCriteriaForUserWithoutActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getTitle(),
+                        search.getYear(),
+                        certList.toArray(new Long[certList.size()]),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
+            else
+                return movieRepository.findBySearchCriteriaForUserWithActor(
+                        search.getId(),
+                        search.getRating(),
+                        search.getActors(),
+                        search.getTitle(),
+                        search.getYear(),
+                        certList.toArray(new Long[certList.size()]),
+                        search.getCertificationId(),
+                        search.getGenreId()
+                );
         }
-    }
-
-    @Override
-    public List<Movie> getMoviesByActors(String actor) {
-        return movieRepository.findByActors(actor);
     }
 
     public List<Long> getCertificationList(Long userId){
