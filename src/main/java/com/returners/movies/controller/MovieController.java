@@ -2,7 +2,7 @@ package com.returners.movies.controller;
 
 import com.returners.movies.constants.Constants;
 import com.returners.movies.exception.MovieAlreadyExistsException;
-import com.returners.movies.exception.MovieIdNotFound;
+import com.returners.movies.exception.MovieIdNotFoundException;
 import com.returners.movies.model.DataResponse;
 import com.returners.movies.model.Movie;
 import com.returners.movies.service.MovieService;
@@ -45,7 +45,7 @@ public class MovieController {
         try {
             movieService.deleteMovie(movieId);
             return ResponseUtil.getSuccessResponse(null, String.format(Constants.DELETED_SUCCESSFULLY, movieId));
-        } catch(MovieIdNotFound e) {
+        } catch(MovieIdNotFoundException e) {
             return ResponseUtil.getErrorResponse(HttpStatus.NOT_FOUND, null, String.format(Constants.ID_DOES_NOT_EXISTS, movieId));
         }
     }

@@ -44,4 +44,15 @@ public class UserControllerTests {
         response.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    public void testAddUser() {
+        User user = getUser();
+
+
+    }
+
+    private User getUser() {
+        return new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636");
+    }
+
 }
