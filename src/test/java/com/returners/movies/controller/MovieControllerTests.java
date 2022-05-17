@@ -101,17 +101,32 @@ public class MovieControllerTests {
     }
 
     @Test
-    public void testPostMappingAddAMovie() throws Exception {
+    public void testPostMappingAddAMovieSuccessful() throws Exception {
         Movie movie = new Movie(1L, new String[]{"Keira Knightley","Ralph Fiennes","Dominic Cooper"}, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
         when(mockMovieServiceImpl.addMovie(movie)).thenReturn(movie);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/movies/add")
+                        MockMvcRequestBuilders.post("/movies")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(movie)))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.MOVIE_ADDED_SUCCESSFULLY, "The Duchess")));
+
 
         verify(mockMovieServiceImpl, times(1)).addMovie(movie);
+    }
+
+    @Test
+    public void testPostMappingAddAMovieUnSuccessful() throws Exception {
+        Movie movie1 = new Movie(1L, new String[]{"Keira Knightley","Ralph Fiennes","Dominic Cooper"}, 6, "The Duchess", 2008, new Certification(4L,"12A"), new Genre(9L,"Drama"));
+        when(mockMovieServiceImpl.addMovie(movie1)).thenReturn(null);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.post("/movies")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(movie1)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.MOVIE_ALREADY_EXISTS, "The Duchess")));
     }
 
     @Test
