@@ -84,15 +84,14 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> getMoviesForUserBySearchCriteria(Long userId,SearchCriteria search){
 
-        SearchCriteria emptyObj = new SearchCriteria();
         List<Long> certList = getCertificationList(userId);
-        if (search.getId() == null && search.getRating() == 0  && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
+        if (search.getId() == null && search.getRating() == 0  && search.getActors() == null && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
             return movieRepository.findAllForUser(certList.toArray(new Long[certList.size()]));
         }else {
             return movieRepository.findBySearchCriteriaForUser(
                     search.getId(),
                     search.getRating(),
-                    //search.getActors(),
+                    search.getActors(),
                     search.getTitle(),
                     search.getYear(),
                     certList.toArray(new Long[certList.size()]),

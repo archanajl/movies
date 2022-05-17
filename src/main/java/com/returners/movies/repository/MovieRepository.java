@@ -28,7 +28,7 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
             "INNER JOIN Certification  c ON m.certification.id = c.id " +
             "INNER JOIN Genre g ON m.genre.id = g.id "+
             "where (c.id IN :ids) AND ( m.id = :id or m.rating = :rating " +
-                //"or array_to_string(actors, ',') like '%' || :actor || '%' " +
+                "or array_to_string(actors, ',') like '%' || :actor || '%' " +
                 "or m.title = :title or m.year = :year " +
                 "or c.id = :certificationId " +
                "or g.id = :genreId)"
@@ -36,7 +36,7 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
     List<Movie> findBySearchCriteriaForUser(
             @Param("id") Long id,
             @Param("rating") int rating,
-            //@Param("actor") String actor,
+            @Param("actor") String actor,
             @Param("title") String title,
             @Param("year") int year,
             @Param("ids") Long[] ids,
