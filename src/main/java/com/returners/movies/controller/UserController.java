@@ -25,14 +25,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<DataResponse> getAllUsers(){
         List<User> users = userService.getAllUsers();
-        System.out.println(users);
         return ResponseUtil.getSuccessResponse(users,"All users fetched") ;
     }
 
     @GetMapping({"/{userId}"})
     public ResponseEntity<DataResponse> getUserById(@PathVariable Long userId){
         User user = userService.findUserById(userId);
-        System.out.println(user);
         return ResponseUtil.getSuccessResponse(user,"All users fetched") ;
     }
 }

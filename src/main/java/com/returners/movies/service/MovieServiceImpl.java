@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -45,14 +43,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> getMoviesBySearchCriteria(SearchCriteria search){
 
-        Optional<Certification> cert = null;
-        Optional<Genre> genre = null;
-        if (search.getCertificationId() != null) {
-            cert = certificationRepository.findById(search.getCertificationId());
-        }
-        if (search.getGenreId() != null) {
-            genre = genreRepository.findById(search.getGenreId());
-        }
         return movieRepository.findByIdOrRatingOrTitleOrYearOrCertificationIdOrGenreId(
                 search.getId(),
                 search.getRating(),
@@ -68,22 +58,14 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getMoviesForUserBySearchCriteria(Long userId,SearchCriteria search){
 
         List<Long> certList = getCertificationList(userId);
-        Optional<Certification> cert = null;
-        Optional<Genre> genre = null;
-        if (search.getCertificationId() != null) {
-            cert = certificationRepository.findById(search.getCertificationId());
-        }
-        System.out.println(cert);
-        if (search.getGenreId() != null) {
-            genre = genreRepository.findById(search.getGenreId());
-        }
+
         return movieRepository.findBySearchCriteria(
                 search.getId(),
                 search.getRating(),
                 //search.getActors(),
                 search.getTitle(),
                 search.getYear(),
-                search.getCertificationId(),
+                certList.toArray(new Long[certList.size()]),
                 search.getGenreId()
         );
     }

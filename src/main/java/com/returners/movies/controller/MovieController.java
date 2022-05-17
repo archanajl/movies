@@ -20,7 +20,6 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<DataResponse> getAllMovies(){
         List<Movie> movies = movieService.getAllMovies();
-        System.out.println(movies);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
     }
 
@@ -28,7 +27,6 @@ public class MovieController {
             value = "/search")
     public ResponseEntity<DataResponse> getMoviesByCriteria(@RequestBody SearchCriteria search) {
         List<Movie> movies = movieService.getMoviesBySearchCriteria(search);
-        System.out.println(movies);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
 
     }
@@ -37,7 +35,6 @@ public class MovieController {
             value = "/search/{userId}")
     public ResponseEntity<DataResponse> getMoviesByCriteria(@PathVariable Long userId, @RequestBody SearchCriteria search) {
         List<Movie> movies = movieService.getMoviesForUserBySearchCriteria(userId,search);
-        System.out.println(movies);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched for user " + userId) ;
 
     }
@@ -45,7 +42,6 @@ public class MovieController {
     @GetMapping({"/search/{actor}"})
     public ResponseEntity<DataResponse> getMoviesByActor(@PathVariable String actor){
         List<Movie> movies = movieService.getMoviesByActors(actor);
-        System.out.println(movies);
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
     }
 

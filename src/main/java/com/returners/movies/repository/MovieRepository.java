@@ -1,7 +1,5 @@
 package com.returners.movies.repository;
 
-import com.returners.movies.model.Certification;
-import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -28,12 +26,12 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
                 );
 
     @Query( "select m from Movie m " +
-            "INNER JOIN Certification c " +
-            "INNER JOIN Genre g "+
+            "INNER JOIN Certification  c ON m.certification.id = c.id " +
+            "INNER JOIN Genre g ON m.genre.id = g.id "+
             "where m.id = :id or m.rating = :rating " +
                 //"or m.actors @> '{Emma Stone}'::text[] " +
                 "or m.title = :title or m.year = :year " +
-               "or c.id = :certificationId " +
+               "AND c.id IN :ids " +
                "or g.id = :genreId"
     )
     List<Movie> findBySearchCriteria(
@@ -42,7 +40,7 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
             //@Param("actors") String actors,
             @Param("title") String title,
             @Param("year") int year,
-            @Param("certificationId") Long certificationId,
+            @Param("ids") Long[] ids,
             @Param("genreId") Long genreId
     );
 }
