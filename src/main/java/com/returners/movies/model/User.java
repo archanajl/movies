@@ -1,5 +1,6 @@
 package com.returners.movies.model;
 
+import com.returners.movies.constants.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,30 +23,30 @@ public class User {
     private Long id;
 
     @Column(name="username", nullable=false)
-    @NotBlank(message = "Username cannot be blank")
+    @NotBlank(message = Constants.USERNAME_CANNOT_BE_BLANK)
     private String userName;
 
     @Column(name="password")
-    @NotBlank(message = "password cannot be blank")
+    @NotBlank(message = Constants.PASSWORD_CANNOT_BE_BLANK)
     private String password;
 
     @Column(name="age")
     @Max(100)
     @Positive
-    @NotNull(message = "Age is required")
+    @NotNull(message = Constants.AGE_REQUIRED)
     private int age;
 
     @Column(name="email")
-    @Email(message = "Please enter valid email")
+    @Email(message = Constants.EMAIL_VALID)
     @NotBlank(message = "Email is mandatory")
     private String email;
 
     @Column(name="name", nullable=false)
-    @NotBlank(message = "Please enter your Name")
+    @NotBlank(message = Constants.NAME_MANDATORY)
     private String name;
 
     @Column(name="phone_number")
-    @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Mobile number is invalid")
+    @Pattern(regexp="^(0|[\\+]44|)\\d{10}$", message = Constants.MOBILE_VALID)
     private String phoneNumber;
 
     public int getAge() {
