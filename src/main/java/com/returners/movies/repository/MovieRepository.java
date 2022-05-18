@@ -16,9 +16,11 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
     @Query( "select m from Movie m " +
             "INNER JOIN Certification  c ON m.certification.id = c.id " +
             "INNER JOIN Genre g ON m.genre.id = g.id "+
-            "where m.id = :id or m.rating = :rating " +
+            "where m.id = :id " +
+            "or m.rating = :rating " +
             "or array_to_string(actors, ',') like '%' || cast(:actor as text) || '%' " +
-            "or m.title = :title or m.year = :year " +
+            "or m.title = :title " +
+            "or m.year = :year " +
             "or c.id = :certificationId " +
             "or g.id = :genreId"
     )
@@ -35,11 +37,14 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
     @Query( "select m from Movie m " +
             "INNER JOIN Certification  c ON m.certification.id = c.id " +
             "INNER JOIN Genre g ON m.genre.id = g.id "+
-            "where (c.id IN :ids) AND ( m.id = :id or m.rating = :rating " +
+            "where (c.id IN :ids) " +
+                "AND (m.id = :id " +
+                "or m.rating = :rating " +
                 "or array_to_string(actors, ',') like '%' || cast(:actor as text) || '%' " +
-                "or m.title = :title or m.year = :year " +
+                "or m.title = :title " +
+                "or m.year = :year " +
                 "or c.id = :certificationId " +
-               "or g.id = :genreId)"
+                "or g.id = :genreId)"
     )
     List<Movie> findBySearchCriteriaForUser(
             @Param("id") Long id,
