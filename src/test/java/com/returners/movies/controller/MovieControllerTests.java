@@ -2,6 +2,7 @@ package com.returners.movies.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.returners.movies.constants.Constants;
+import com.returners.movies.exception.MovieIdNotFound;
 import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
@@ -131,6 +132,7 @@ public class MovieControllerTests {
 
     @Test
     public void testDeleteAPIWhenIDExists() throws Exception {
+        mockMovieServiceImpl.deleteMovie(5L);
         mockMvcController.perform(MockMvcRequestBuilders.delete("/movies/{movieId}", 5))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.DELETED_SUCCESSFULLY, 5)));
@@ -138,6 +140,7 @@ public class MovieControllerTests {
 
     @Test
     public void testDeleteAPIWhenIDDoesNotExists() throws Exception {
+        doThrow(new MovieIdNotFound()).when(mockMovieServiceImpl).deleteMovie(anyLong());
         mockMvcController.perform(MockMvcRequestBuilders.delete("/movies/{movieId}", 5))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.ID_DOES_NOT_EXISTS, 5)));
