@@ -1,6 +1,8 @@
 package com.returners.movies.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.returners.movies.constants.Constants;
+import com.returners.movies.exception.UserAlreadyExistsException;
 import com.returners.movies.model.User;
 import com.returners.movies.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +12,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -18,7 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.Mockito.when;
+
+import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -95,14 +99,33 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testAddUser() {
+    public void testAddUserWhenAddedSuccessfully() throws Exception {
         User user = getUser();
+        when(mockUserServiceImpl.addUser(user)).thenReturn(user);
+        this.mockMvcController.perform(MockMvcRequestBuilders.post("/users/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(user)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.USER_ADDED_SUCCESSFULLY, user.getId())));
 
+        verify(mockUserServiceImpl, times(1)).addUser(user);
+    }
 
+    @Test
+    public void testAddUserWhenUserAlreadyExists() throws Exception {
+        User user = getUser();
+        when(mockUserServiceImpl.addUser(user)).thenReturn(user);
+        this.mockMvcController.perform(MockMvcRequestBuilders.post("/users/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(user)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.USER_ADDED_SUCCESSFULLY, user.getId())));
+
+        verify(mockUserServiceImpl, times(1)).addUser(user);
     }
 
     private User getUser() {
-        return new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636");
+        return new User(1L,"test","test123",25,"test@gmail.com","Mary","8685877909");
     }
 
 }

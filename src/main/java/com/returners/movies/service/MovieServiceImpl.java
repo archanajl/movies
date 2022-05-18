@@ -4,7 +4,6 @@ import com.returners.movies.exception.MovieIdNotFoundException;
 import com.returners.movies.model.*;
 import com.returners.movies.repository.CertificationRepository;
 import com.returners.movies.repository.GenreRepository;
-import com.returners.movies.exception.MovieIdNotFound;
 import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
