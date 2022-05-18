@@ -10,7 +10,6 @@ public interface MovieService {
     List<Movie> getAllMovies();
     List<Movie> getMoviesBySearchCriteria(SearchCriteria search);
     List<Movie> getMoviesForUserBySearchCriteria(Long userId,SearchCriteria search);
-    List<Movie> getMoviesByActors(String actor);
     Movie addMovie(Movie movie);
     void deleteMovie(Long movieId) throws MovieIdNotFoundException;
 }
