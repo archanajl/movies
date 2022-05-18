@@ -48,8 +48,6 @@ Assumptions:
 
 Any user can view the movie recommendations. No authorization checks done.
 
-All movies satisfying any of the search criteria are displayed.
-
 ### <ins>Key Features of the application</ins>
 
  - Allows registering users using the /users/add endpoint

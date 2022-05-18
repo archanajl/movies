@@ -62,6 +62,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getMoviesBySearchCriteria(SearchCriteria search){
+
         if (search.getId() == null && search.getRating() == 0  && search.getActors() == null && search.getTitle() == null  && search.getGenreId() == null && search.getCertificationId() == null  && search.getYear() == 0 ){
             return movieRepository.findAll();
         }else {

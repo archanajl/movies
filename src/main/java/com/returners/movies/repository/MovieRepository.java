@@ -16,13 +16,13 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
     @Query( "select m from Movie m " +
             "INNER JOIN Certification  c ON m.certification.id = c.id " +
             "INNER JOIN Genre g ON m.genre.id = g.id "+
-            "where m.id = :id " +
-            "or m.rating = :rating " +
-            "or array_to_string(actors, ',') like '%' || cast(:actor as text) || '%' " +
-            "or m.title = :title " +
-            "or m.year = :year " +
-            "or c.id = :certificationId " +
-            "or g.id = :genreId"
+            "where (:id IS NULL OR m.id = :id) " +
+            "AND (:rating = 0 OR m.rating = :rating) " +
+            "AND (:actor IS NULL OR array_to_string(actors, ',') like '%' || cast(:actor as text) || '%') " +
+            "AND (:title IS NULL OR m.title = :title) " +
+            "AND (:year = 0 OR m.year = :year) " +
+            "AND (:certificationId IS NULL OR c.id = :certificationId) " +
+            "AND (:genreId IS NULL OR g.id = :genreId)"
     )
     List<Movie> findBySearchCriteria(
             @Param("id") Long id,
@@ -38,13 +38,13 @@ public interface MovieRepository extends JpaRepository<Movie,Long> {
             "INNER JOIN Certification  c ON m.certification.id = c.id " +
             "INNER JOIN Genre g ON m.genre.id = g.id "+
             "where (c.id IN :ids) " +
-                "AND (m.id = :id " +
-                "or m.rating = :rating " +
-                "or array_to_string(actors, ',') like '%' || cast(:actor as text) || '%' " +
-                "or m.title = :title " +
-                "or m.year = :year " +
-                "or c.id = :certificationId " +
-                "or g.id = :genreId)"
+                "AND (:id IS NULL OR m.id = :id) " +
+                "AND (:rating = 0 OR m.rating = :rating) " +
+                "AND (:actor IS NULL OR array_to_string(actors, ',') like '%' || cast(:actor as text) || '%') " +
+                "AND (:title IS NULL OR m.title = :title) " +
+                "AND (:year = 0 OR m.year = :year) " +
+                "AND (:certificationId IS NULL OR c.id = :certificationId) " +
+                "AND (:genreId IS NULL OR g.id = :genreId)"
     )
     List<Movie> findBySearchCriteriaForUser(
             @Param("id") Long id,
