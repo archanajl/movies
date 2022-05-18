@@ -1,5 +1,6 @@
 package com.returners.movies.service;
 
+import com.returners.movies.constants.Constants;
 import com.returners.movies.exception.UserAlreadyExistsException;
 import com.returners.movies.model.User;
 import com.returners.movies.repository.UserRepository;
@@ -34,16 +35,15 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-
-    
     @Override
-    public void addUser(User user) throws UserAlreadyExistsException {
+    public User addUser(User user) throws UserAlreadyExistsException {
         List<User> usersList = getAllUsers();
-        long existingUser = usersList.stream().filter(u -> u.getEmail().equals(user.getEmail()) || u.getUserName().equals(user.getUserName())).count();
-        if(existingUser > 0) {
-            throw new UserAlreadyExistsException();
+        if(usersList.stream().filter(u -> u.getUserName().equals(user.getUserName())).count() > 0) {
+            throw new UserAlreadyExistsException(String.format(Constants.USERNAME_ALREADY_EXISTS, user.getUserName()));
         }
-        User i = userRepository.save(user);
-
+        if(usersList.stream().filter(u -> u.getEmail().equals(user.getEmail())).count() > 0) {
+            throw new UserAlreadyExistsException(String.format(Constants.USER_EMAIL_ALREADY_EXISTS, user.getEmail()));
+        }
+        return userRepository.save(user);
     }
 }

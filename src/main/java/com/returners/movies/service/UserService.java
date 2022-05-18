@@ -10,12 +10,7 @@ public interface UserService {
     List<User> getAllUsers();
     boolean deleteUserById(Long id);
 
-    List<User> getAllUsers();
-//check existing username,
-// email unique and valid,
-// age number,
-// phone contains number only and should be valid
-    void addUser(User user) throws UserAlreadyExistsException;
+    User addUser(User user) throws UserAlreadyExistsException;
 
 
 }
