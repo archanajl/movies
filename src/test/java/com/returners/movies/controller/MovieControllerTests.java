@@ -132,6 +132,7 @@ public class MovieControllerTests {
 
     @Test
     public void testDeleteAPIWhenIDExists() throws Exception {
+        mockMovieServiceImpl.deleteMovie(5L);
         mockMvcController.perform(MockMvcRequestBuilders.delete("/movies/{movieId}", 5))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.DELETED_SUCCESSFULLY, 5)));
