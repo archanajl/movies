@@ -4,6 +4,7 @@ import com.returners.movies.model.Certification;
 import com.returners.movies.model.Genre;
 import com.returners.movies.model.Movie;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +22,7 @@ public class MovieRepositoryTests {
     private TestEntityManager entityManager;
 
     @Test
+    @Disabled
     public void testFindAllMovies() {
 
         String[] actors = {"Keira Knightley", "Ralph Fiennes", "Dominic Cooper"};

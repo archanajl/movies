@@ -114,12 +114,12 @@ public class UserControllerTests {
     @Test
     public void testAddUserWhenUserAlreadyExists() throws Exception {
         User user = getUser();
-        when(mockUserServiceImpl.addUser(user)).thenReturn(user);
+        when(mockUserServiceImpl.addUser(user)).thenThrow(new UserAlreadyExistsException(String.format(Constants.USER_EMAIL_ALREADY_EXISTS, user.getEmail())));
         this.mockMvcController.perform(MockMvcRequestBuilders.post("/users/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(user)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.USER_ADDED_SUCCESSFULLY, user.getId())));
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.USER_EMAIL_ALREADY_EXISTS, user.getEmail())));
 
         verify(mockUserServiceImpl, times(1)).addUser(user);
     }
