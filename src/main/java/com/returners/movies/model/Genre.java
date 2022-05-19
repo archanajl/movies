@@ -1,5 +1,6 @@
 package com.returners.movies.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Genre {
     private Long id;
 
     @Column(name="name", nullable=false)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String name;
 
 }

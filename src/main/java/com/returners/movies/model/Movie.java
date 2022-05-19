@@ -1,6 +1,7 @@
 package com.returners.movies.model;
 
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +11,8 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Table(name="movie")
 @Entity
@@ -29,6 +29,7 @@ public class Movie {
     @Id
     @GeneratedValue
     @Column(updatable = false, nullable = false)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @Column(columnDefinition = "text[]")
