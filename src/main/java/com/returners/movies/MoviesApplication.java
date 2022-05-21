@@ -1,5 +1,6 @@
 package com.returners.movies;
 
+import com.twilio.Twilio;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -33,6 +34,7 @@ public class MoviesApplication {
 	}
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(MoviesApplication.class, args);
 	}
 
