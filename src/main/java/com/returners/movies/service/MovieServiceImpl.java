@@ -125,15 +125,19 @@ public class MovieServiceImpl implements MovieService {
             String apiKey = System.getenv("TWILIO_API_KEY");
             String twilioPhoneNumber = System.getenv("TWILIO_PHONE_NUMBER");
             if (accountSID != "" && apiKey != "" && twilioPhoneNumber != "") {
-                Twilio.init(accountSID, apiKey);
-                Message.creator(
+                try {
+                    Twilio.init(accountSID, apiKey);
+                    Message.creator(
 
-                        new PhoneNumber(userPhoneNumber),
-                        new PhoneNumber(twilioPhoneNumber),
+                            new PhoneNumber(userPhoneNumber),
+                            new PhoneNumber(twilioPhoneNumber),
 
-                        "Hi 📞" + user.getName() + " , you have got " + numMovies + " movies as your search result. " +
-                                "Please check your email for more details.")
-                        .create();
+                            "Hi 📞" + user.getName() + " , you have got " + numMovies + " movies as your search result. " +
+                                    "Please check your email for more details.")
+                            .create();
+                }catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
