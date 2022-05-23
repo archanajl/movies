@@ -3,7 +3,7 @@
 ### <ins>Goal of the application</ins>
 
 - Movies API to get movie recommendations based on inputted criteria, e.g.
-year/genre/actor/ratings/certification. 
+  year/genre/actor/ratings/certification.
 - Add checks for the age of who will be watching.
 
 ### <ins>Movies API Business Requirements</ins>
@@ -12,7 +12,7 @@ year/genre/actor/ratings/certification.
 - API base URL and endpoints appropriately named.
 - Include unit tests.
 - Dscriptive README to document the key features of your solution, your assumptions, approaches
-and future thoughts.
+  and future thoughts.
 - API endpoints well documented.
 - Error and exception handling considerations included.
 - /info endpoint to give the user information on how the application works.
@@ -24,7 +24,7 @@ As a movies API user
 I must be able to get movie recommendations based on id/title/year/genre/actor/ratings/certification.
 
 - GIVEN a user wants to request some movie recommendations
-- WHEN the request body includes id/title/year/genre/actor/ratings/certification 
+- WHEN the request body includes id/title/year/genre/actor/ratings/certification
 - THEN the customer should be given a response object with the movies satisfying the search criteria.
 
 As a movies API registered user
@@ -32,43 +32,45 @@ I must be able to get movie recommendations ,based on my age, based on year/genr
 
 - GIVEN a user wants to request some movie recommendations
 - WHEN the request body includes year/genre/actor/ratings/certification
-- THEN the customer should be given a response object with only the movies that can be allowed for my age and 
+- THEN the customer should be given a response object with only the movies that can be allowed for my age and
   satisfying the search criteria.
-  
+
 
 ### <ins>Acceptance Criteria and Assumptions</ins>
 
 Movies API should return the movie recommendations based on the search criteria.
 
 Movies API will have two types of users:
-    - Unregistered users will be given the movies recommendations without checking their age.
-    - Registered users will be given the movies recommendations that are relevant to their age.
-
+- Unregistered users will be given the movies recommendations without checking their age.
+- Registered users will be given the movies recommendations that are relevant to their age.
+  Mail and sms will be send to the user.
+  
 Assumptions:
 
 Any user can view the movie recommendations. No authorization checks done.
 
 ### <ins>Key Features of the application</ins>
 
- - Allows registering users using the /users/add endpoint
+- Allows registering users using the /users/add endpoint
 
- - Users can also be viewed and deleted using /users and users/delete/{userId} endpoint
+- Users can also be viewed and deleted using /users and users/delete/{userId} endpoint
 
- - Registered users can view their movie recommendations using the /movies/search/{userId} endpoint
-   along with the request body (id/title/year/genre/actor/ratings/certification).
-   Only age appropriate movies will be given.
+- Registered users can view their movie recommendations using the /movies/search/{userId} endpoint
+  along with the request body (id/title/year/genre/actor/ratings/certification).
+  Only age appropriate movies will be given.
 
- - UnRegistered users can view their movie recommendations using the /movies/search endpoint
+- UnRegistered users can view their movie recommendations using the /movies/search endpoint
   along with the request body (id/title/year/genre/actor/ratings/certification)
-   
- - Movies can also be added and deleted using  /movies/add and movies/delete/{movieId}
 
- - API health can be checked at /health endpoint
+- Movies can also be added and deleted using  /movies/add and movies/delete/{movieId}
 
- - Information about the API can be found at /info
+- API health can be checked at /health endpoint
 
- - API endpoints can be found at swagger.io
+- Information about the API can be found at /info
 
+- API endpoints can be found at swagger.io
+
+- Use Twilio API to send sms/email
 
 ### <ins>Approach to the solution</ins>
 
@@ -91,13 +93,13 @@ Please Click [here](https://htmlpreview.github.io/?https://github.com/https://gi
 
 We created the project structure.
 
-We made a github repo and pushed the code to git and added contributors to it 
+We made a github repo and pushed the code to git and added contributors to it
 so that we can work on it individually
 
 
 - Step Three:
 
-We discussed the model to be used including the data type and split up the work to create the movies and user 
+We discussed the model to be used including the data type and split up the work to create the movies and user
 related modules for controller, services and repository
 
 We also included the responseUtil so that all the modules return the same structure
@@ -116,13 +118,17 @@ We included The API documentation through swagger.
 
 Test all the APIs through Postman. Create a collection in the Postman.
 
-Deployment to AWS using dockers
+- Step Seven:
+  
+Deployment to AWS using EC2 instances. Run the application locally through Docker.
+
+- Step Eight:
+
+Used Twilio API to send sms and email to the registered users.
 
 ### <ins> To improve </ins>
 
 - Include a favorite module so that the users can save their favourite movies.
-
-- Use Twilio API to send sms/email
 
 - Authentication to the users
 
@@ -137,7 +143,7 @@ Please click [here](https://htmlpreview.github.io/?https://github.com/https://gi
     JUnit 5
     PostgresSQL
     Swagger
-    
+
 
 ### <ins>Tools used in the project</ins>
 
