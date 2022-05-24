@@ -91,6 +91,8 @@ We designed the database structure and UML class design.
 
 Please Click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/s-prat/movies/blob/master/docs/Postgres_Table_Design.png) to view the database design
 
+Please Click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/s-prat/movies/blob/master/docs/Movies-UML-Design.png) to view the UML design
+
 We created the project structure.
 
 We made a github repo and pushed the code to git and added contributors to it
@@ -134,8 +136,16 @@ Used Twilio API to send sms and email to the registered users.
 
 ### <ins> Testcases </ins>
 
-Please click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/s-prat/movies/blob/master/docs/Test%20Results%20-%20MoviesAPI.html) to see the test results.
+Please click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Test%20Results%20-%20MoviesAPI.html) to see the test results.
 
+We also tested the application endpoints using postman.
+We included three collections for aws, docker (local) and local. click below to view the respective ones.
+  
+  - [aws](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20aws.postman_collection.json)
+
+  - [docker](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20docker.postman_collection.json)
+
+  - [local](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20local.postman_collection.json)
 ### <ins>Technologies Used</ins>
 
     Java
