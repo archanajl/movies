@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "9b62c418-e57c-4e03-afc0-532c6b1bc72f",
+		"name": "Movies API - docker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11460738"
+	},
+	"item": [
+		{
+			"name": "Search all Movies for user 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify movies for user 1\",  () => {",
+							"    pm.expect(pm.response.json().data[0].id).to.equal(5)",
+							"    pm.expect(pm.response.json().data[0].rating).to.equal(6)",
+							"    pm.expect(pm.response.json().data[1].id).to.equal(1)",
+							"    pm.expect(pm.response.json().data[1].title).to.equal('The Duchess')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search all Movies for unregistered user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify movies for unregistered user\",  () => {",
+							"    pm.expect(pm.response.json().data[0].id).to.equal(2)",
+							"    pm.expect(pm.response.json().data[0].rating).to.equal(9)",
+							"    pm.expect(pm.response.json().data[1].id).to.equal(3)",
+							"    pm.expect(pm.response.json().data[1].title).to.equal('The Bucket List')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Movies in year 1994 for user under 18 yrs age",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify movies for year 1994 below 18\",  () => {",
+							"    pm.expect(pm.response.json().data).is.empty",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"year\":1994\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Movies in year 1994 for adults",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify movies for year 1994 for adult\",  () => {",
+							"",
+							"    pm.expect(pm.response.json().data[0].id).to.equal(2)",
+							"    pm.expect(pm.response.json().data[0].rating).to.equal(9)",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"year\":1994\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search movies based on actor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify movies based on actor\",  () => {",
+							"    pm.expect(pm.response.json().data[0].id).to.equal(2)",
+							"    pm.expect(pm.response.json().data[0].rating).to.equal(9)",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"actors\":\"Tim\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Movies with all criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify movies for more search criteria\",  () => {",
+							"    pm.expect(pm.response.json().data[0].id).to.equal(2)",
+							"    pm.expect(pm.response.json().data[0].rating).to.equal(9)",
+							"    pm.expect(pm.response.json().data[0].year).to.equal(1994)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"actors\": \"Tim\",\n \"rating\": 9,\n \"title\": \"The Shawshank Redemption\",\n  \"year\": 1994,\n  \"genre\": 9\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all the users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify users \",  () => {",
+							"    pm.expect(pm.response.json().data[0].id).to.equal(1)",
+							"    pm.expect(pm.response.json().data[0].userName).to.equal('paul')",
+							"    pm.expect(pm.response.json().data[0].age).to.equal(30)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete non exisiting user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Verify users \",  () => {",
+							"    pm.expect(pm.response.json().message).to.equal('Id 60 does not exist')",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/delete/60",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"delete",
+						"60"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add user with same email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"  pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Verify Add user with same email\",  () => {",
+							"    pm.expect(pm.response.json().data.id).is.null",
+							"    pm.expect(pm.response.json().data.userName).to.equal('nametest')",
+							"    pm.expect(pm.response.json().data.password).to.equal('pwdtest')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userName\": \"nametest\",\n  \"password\": \"pwdtest\",\n  \"age\": 100,\n  \"email\": \"test@gmail.com\",\n  \"name\": \"Test\",\n  \"phoneNumber\": \"03669716682\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
