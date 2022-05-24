@@ -52,4 +52,8 @@ public class User {
     public int getAge() {
         return age;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
