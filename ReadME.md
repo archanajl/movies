@@ -89,9 +89,9 @@ We also created the trello account and added our team to it.
 
 We designed the database structure and UML class design.
 
-Please Click [here](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Postgres_Table_Design.png) to view the database design
+Please Click [here](https://github.com/archanajl/movies/blob/master/docs/Postgres_Table_Design.png) to view the database design
 
-Please Click [here](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies-UML-Design.png) to view the UML design
+Please Click [here](https://github.com/archanajl/movies/blob/master/docs/Movies-UML-Design.png) to view the UML design
 
 We created the project structure.
 
