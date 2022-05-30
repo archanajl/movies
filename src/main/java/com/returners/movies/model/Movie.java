@@ -32,6 +32,14 @@ public class Movie {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    public String[] getActors() {
+        return actors;
+    }
+
+    public void setActors(String[] actors) {
+        this.actors = actors;
+    }
+
     @Column
     @Type(type = "com.returners.movies.util.CustomStringArrayType")
     //@NotEmpty(message = "Movie actors' names are mandatory!")

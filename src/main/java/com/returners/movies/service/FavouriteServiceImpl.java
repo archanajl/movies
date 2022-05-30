@@ -21,7 +21,6 @@ public class FavouriteServiceImpl implements FavouriteService{
 
         User user= userRepository.findById(userId).get();
         Movie movie = movieRepository.findById(movieId).get();
-        System.out.println(movie);
         user.addFavourite(movie);
         return userRepository.save(user);
     }

@@ -11,7 +11,7 @@
 - API endpoints with the appropriate HTTP verbs.
 - API base URL and endpoints appropriately named.
 - Include unit tests.
-- Dscriptive README to document the key features of your solution, your assumptions, approaches
+- Descriptive README to document the key features of your solution, your assumptions, approaches
   and future thoughts.
 - API endpoints well documented.
 - Error and exception handling considerations included.

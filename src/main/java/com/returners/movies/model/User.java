@@ -54,7 +54,7 @@ public class User {
     @Pattern(regexp="^(0|[\\+]44|)\\d{10}$", message = Constants.MOBILE_VALID)
     private String phoneNumber;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "favorite_movies",
             joinColumns = @JoinColumn(name = "user_id"),
