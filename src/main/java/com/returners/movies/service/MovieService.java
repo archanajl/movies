@@ -12,4 +12,6 @@ public interface MovieService {
     List<Movie> getMoviesForUserBySearchCriteria(Long userId,SearchCriteria search);
     Movie addMovie(Movie movie);
     void deleteMovie(Long movieId) throws MovieIdNotFoundException;
+
+    Movie getMoviesById(Long movieId);
 }

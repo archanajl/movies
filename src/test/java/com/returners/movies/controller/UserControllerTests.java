@@ -48,11 +48,11 @@ public class UserControllerTests {
 
     public List<User> initializeUsers(){
         List<User> users = new ArrayList<>();
-        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626");
+        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null);
         users.add(user);
-        user = new User(2L, "jane", "test123",13,"jane@gmail.com", "Jane", "0161 496 0626");
+        user = new User(2L, "jane", "test123",13,"jane@gmail.com", "Jane", "0161 496 0626",null);
         users.add(user);
-        user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626");
+        user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626",null);
         users.add(user);
         return users;
     }
@@ -78,7 +78,7 @@ public class UserControllerTests {
     public void testGetUsersBySearch() throws Exception {
 
 
-        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626");
+        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null);
 
         when(mockUserServiceImpl.findUserById(user.getId())).thenReturn(user);
 
@@ -92,7 +92,7 @@ public class UserControllerTests {
     @Test
     public void testDeleteMappingDeleteAUser() throws Exception {
         Long id = 1L;
-        User user = new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636");
+        User user = new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636",null);
         when(mockUserServiceImpl.deleteUserById(id)).thenReturn(true);
         ResultActions response = this.mockMvcController.perform( MockMvcRequestBuilders.delete("/users/delete/" + id));
         response.andExpect(MockMvcResultMatchers.status().isOk());
@@ -125,7 +125,7 @@ public class UserControllerTests {
     }
 
     private User getUser() {
-        return new User(1L,"test","test123",25,"test@gmail.com","Mary","8685877909");
+        return new User(1L,"test","test123",25,"test@gmail.com","Mary","8685877909",null);
     }
 
 }

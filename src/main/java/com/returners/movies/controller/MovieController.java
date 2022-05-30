@@ -29,6 +29,12 @@ public class MovieController {
         return ResponseUtil.getSuccessResponse(movies,"All movies fetched") ;
     }
 
+    @GetMapping({"/{movieId}"})
+    public ResponseEntity<DataResponse> getMoviesById(@PathVariable Long movieId){
+        Movie movie = movieService.getMoviesById(movieId);
+        return ResponseUtil.getSuccessResponse(movie,"All movies fetched") ;
+    }
+
     @PostMapping(
             value = "/search")
     public ResponseEntity<DataResponse> getMoviesByCriteria(@RequestBody SearchCriteria search) {

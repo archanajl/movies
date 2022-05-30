@@ -128,9 +128,13 @@ Deployment to AWS using EC2 instances. Run the application locally through Docke
 
 Used Twilio API to send sms and email to the registered users.
 
-### <ins> To improve </ins>
+### <ins>Extension after project submission </ins>
 
 - Include a favorite module so that the users can save their favourite movies.
+
+- Used many to many relationship
+
+### <ins> To improve </ins>
 
 - Authentication to the users
 

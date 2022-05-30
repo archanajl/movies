@@ -72,16 +72,16 @@ public class UserServiceTest {
 
     private List<User> getUsers(){
         List<User> users = new ArrayList<>();
-        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626");
+        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null);
         users.add(user);
-        user = new User(2L, "jane", "test123",13,"jane@gmail.com", "Jane", "0161 496 0626");
+        user = new User(2L, "jane", "test123",13,"jane@gmail.com", "Jane", "0161 496 0626",null);
         users.add(user);
-        user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626");
+        user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626",null);
         users.add(user);
         return users;
     }
 
     private User getUser(String userName, String email) {
-        return new User(4L, userName, "test123",30, email, "Paul", "0131 496 0626");
+        return new User(4L, userName, "test123",30, email, "Paul", "0131 496 0626",null);
     }
 }

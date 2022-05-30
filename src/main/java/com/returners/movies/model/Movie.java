@@ -32,9 +32,10 @@ public class Movie {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Column(columnDefinition = "text[]")
+    @Column
     @Type(type = "com.returners.movies.util.CustomStringArrayType")
-    private @NotEmpty(message = "Movie actors' names are mandatory!") String[] actors;
+    //@NotEmpty(message = "Movie actors' names are mandatory!")
+    private String[] actors;
 
     @Column
     private int rating;
