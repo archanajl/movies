@@ -11,7 +11,7 @@
 - API endpoints with the appropriate HTTP verbs.
 - API base URL and endpoints appropriately named.
 - Include unit tests.
-- Dscriptive README to document the key features of your solution, your assumptions, approaches
+- Descriptive README to document the key features of your solution, your assumptions, approaches
   and future thoughts.
 - API endpoints well documented.
 - Error and exception handling considerations included.
@@ -89,9 +89,9 @@ We also created the trello account and added our team to it.
 
 We designed the database structure and UML class design.
 
-Please Click [here](https://github.com/archanajl/movies/blob/master/docs/Postgres_Table_Design.png) to view the database design
+Please Click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/s-prat/movies/blob/master/docs/Postgres_Table_Design.png) to view the database design
 
-Please Click [here](https://github.com/archanajl/movies/blob/master/docs/Movies-UML-Design.png) to view the UML design
+Please Click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/s-prat/movies/blob/master/docs/Movies-UML-Design.png) to view the UML design
 
 We created the project structure.
 
@@ -128,24 +128,28 @@ Deployment to AWS using EC2 instances. Run the application locally through Docke
 
 Used Twilio API to send sms and email to the registered users.
 
-### <ins> To improve </ins>
+### <ins>Extension after project submission </ins>
 
 - Include a favorite module so that the users can save their favourite movies.
+
+- Used many to many relationship
+
+### <ins> To improve </ins>
 
 - Authentication to the users
 
 ### <ins> Testcases </ins>
 
-Please click [here](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Test%20Results%20-%20MoviesAPI.html) to see the test results.
+Please click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Test%20Results%20-%20MoviesAPI.html) to see the test results.
 
 We also tested the application endpoints using postman.
 We included three collections for aws, docker (local) and local. click below to view the respective ones.
   
-  - [aws](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20aws.postman_collection.json)
+  - [aws](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20aws.postman_collection.json)
 
-  - [docker](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20docker.postman_collection.json)
+  - [docker](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20docker.postman_collection.json)
 
-  - [local](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20local.postman_collection.json)
+  - [local](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20local.postman_collection.json)
 ### <ins>Technologies Used</ins>
 
     Java
