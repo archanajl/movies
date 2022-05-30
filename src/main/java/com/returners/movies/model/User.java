@@ -1,5 +1,6 @@
 package com.returners.movies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.returners.movies.constants.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Table(name="\"user\"")
 @Entity
@@ -49,11 +54,27 @@ public class User {
     @Pattern(regexp="^(0|[\\+]44|)\\d{10}$", message = Constants.MOBILE_VALID)
     private String phoneNumber;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "favorite_movies",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
+    private Set<Movie> favouriteMovies = new HashSet<>();
+
     public int getAge() {
         return age;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void addFavourite(Movie movie) {
+        favouriteMovies.add(movie);
+    }
+
+    public void deleteFavourite(Movie movie) {
+        favouriteMovies.remove(movie);
     }
 }
