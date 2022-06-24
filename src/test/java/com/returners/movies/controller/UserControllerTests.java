@@ -48,11 +48,11 @@ public class UserControllerTests {
 
     public List<User> initializeUsers(){
         List<User> users = new ArrayList<>();
-        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null);
+        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null, null);
         users.add(user);
-        user = new User(2L, "jane", "test123",13,"jane@gmail.com", "Jane", "0161 496 0626",null);
+        user = new User(2L, "jane", "test123",13,"jane@gmail.com", "Jane", "0161 496 0626",null,null);
         users.add(user);
-        user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626",null);
+        user = new User(3L, "bridget", "test123",18,"bridget@gmail.com", "Bridget", "0116 496 0626",null, null);
         users.add(user);
         return users;
     }
@@ -78,21 +78,21 @@ public class UserControllerTests {
     public void testGetUsersBySearch() throws Exception {
 
 
-        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null);
+        User user = new User(1L, "paul", "test123",30,"paul@gmail.com", "Paul", "0131 496 0626",null,null);
 
         when(mockUserServiceImpl.findUserById(user.getId())).thenReturn(user);
 
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.get("/users/" + user.getId()))
-                        .andExpect(MockMvcResultMatchers.status().isOk())
-                        .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(1L))
-                        .andExpect(MockMvcResultMatchers.jsonPath("$.data.name").value("Paul"));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(1L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name").value("Paul"));
     }
 
     @Test
     public void testDeleteMappingDeleteAUser() throws Exception {
         Long id = 1L;
-        User user = new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636",null);
+        User user = new User(1L,"test","test123",25,"test@gmail.com","Mary","0161 496 0636",null,null);
         when(mockUserServiceImpl.deleteUserById(id)).thenReturn(true);
         ResultActions response = this.mockMvcController.perform( MockMvcRequestBuilders.delete("/users/delete/" + id));
         response.andExpect(MockMvcResultMatchers.status().isOk());
@@ -116,8 +116,8 @@ public class UserControllerTests {
         User user = getUser();
         when(mockUserServiceImpl.addUser(user)).thenThrow(new UserAlreadyExistsException(String.format(Constants.USER_EMAIL_ALREADY_EXISTS, user.getEmail())));
         this.mockMvcController.perform(MockMvcRequestBuilders.post("/users/")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(user)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(String.format(Constants.USER_EMAIL_ALREADY_EXISTS, user.getEmail())));
 
@@ -125,7 +125,7 @@ public class UserControllerTests {
     }
 
     private User getUser() {
-        return new User(1L,"test","test123",25,"test@gmail.com","Mary","8685877909",null);
+        return new User(1L,"test","test123",25,"test@gmail.com","Mary","8685877909",null,null);
     }
 
 }
