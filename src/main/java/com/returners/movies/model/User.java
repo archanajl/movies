@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Table(name="\"user\"")
 @Entity
@@ -60,7 +57,10 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private Set<Movie> favouriteMovies = new HashSet<>();
+    private List<Movie> favouriteMovies = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<Role> roles = new ArrayList<>();
 
     public int getAge() {
         return age;

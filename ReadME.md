@@ -128,15 +128,19 @@ Deployment to AWS using EC2 instances. Run the application locally through Docke
 
 Used Twilio API to send sms and email to the registered users.
 
+Please click [here](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Email.png) to view a sample email format.
+
 ### <ins>Extension after project submission </ins>
 
 - Include a favorite module so that the users can save their favourite movies.
 
-- Used many to many relationship
+- Added roles to users
+
+- Authentication of the users to access the API endpoint
 
 ### <ins> To improve </ins>
 
-- Authentication to the users
+- Authorization to the users
 
 ### <ins> Testcases </ins>
 
@@ -150,6 +154,7 @@ We included three collections for aws, docker (local) and local. click below to 
   - [docker](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20docker.postman_collection.json)
 
   - [local](https://htmlpreview.github.io/?https://github.com/https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20local.postman_collection.json)
+
 ### <ins>Technologies Used</ins>
 
     Java
