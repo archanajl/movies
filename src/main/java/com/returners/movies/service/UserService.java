@@ -9,7 +9,7 @@ public interface UserService {
     User findUserById(Long id);
     List<User> getAllUsers();
     boolean deleteUserById(Long id);
-
+    User getUserByUserName(String username);
     User addUser(User user) throws UserAlreadyExistsException;
 
 

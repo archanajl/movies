@@ -138,9 +138,13 @@ Please click [here](https://htmlpreview.github.io/?https://github.com/archanajl/
 
 - Authentication of the users to access the API endpoint
 
+- Authorization to the endpoints depending on the user roles
+
 ### <ins> To improve </ins>
 
-- Authorization to the users
+- Improve the sceurity
+
+- Not expose the password for the user details
 
 ### <ins> Testcases </ins>
 
