@@ -1,6 +1,7 @@
 package com.returners.movies.security;
 
 import com.returners.movies.filter.CustomAuthenticationFilter;
+import com.returners.movies.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.*;
 
@@ -40,16 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers(POST,"/movies/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(POST,"/movies/search/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(DELETE,"/movies/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(POST,"/users/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET,"/users/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(DELETE,"/users/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(PUT,"/favourites/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(DELETE,"/favourites/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(POST,"/movies/**").hasAnyAuthority("MANAGER");
+        http.authorizeRequests().antMatchers(POST,"/movies/search/**").hasAnyAuthority("VIEWER");
+        http.authorizeRequests().antMatchers(DELETE,"/movies/**").hasAnyAuthority("MANAGER");
+        http.authorizeRequests().antMatchers(POST,"/users/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(GET,"/users/**").hasAnyAuthority("VIEWER");
+        http.authorizeRequests().antMatchers(DELETE,"/users/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(PUT,"/favourites/**").hasAnyAuthority("VIEWER");
+        http.authorizeRequests().antMatchers(DELETE,"/favourites/**").hasAnyAuthority("VIEWER");
 
         http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter(new CustomAuthenticationFilter( authenticationManagerBean()));
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
