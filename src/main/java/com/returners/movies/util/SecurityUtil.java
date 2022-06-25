@@ -4,19 +4,28 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.returners.movies.model.AuthUserInfo;
 
 public class SecurityUtil {
 
-    public static String[] getRolesfromHeader(String authorizartionHeader){
+    private final static String ALGO_CODE = "secret";
 
+    public static AuthUserInfo getAuthHeaderDetails(String authorizartionHeader){
+
+        AuthUserInfo authUserInfo = new AuthUserInfo();
         String token = authorizartionHeader.substring("Bearer ".length());
-        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        Algorithm algorithm = getAlgorithmDetails();
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
-        String username = decodedJWT.getSubject();
-        String roles[] = decodedJWT.getClaim("roles").asArray(String.class);
-        return roles;
+        authUserInfo.setToken(token);
+        authUserInfo.setUserName(decodedJWT.getSubject());
+        authUserInfo.setRoles(decodedJWT.getClaim("roles").asArray(String.class));
+        return authUserInfo;
 
+    }
+
+    public static Algorithm getAlgorithmDetails(){
+        return Algorithm.HMAC256(ALGO_CODE.getBytes());
     }
 
 }

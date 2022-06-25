@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.returners.movies.model.AuthUserInfo;
+import com.returners.movies.util.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,17 +38,12 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             String authorizartionHeader = request.getHeader(AUTHORIZATION);
             if(authorizartionHeader != null && authorizartionHeader.startsWith("Bearer ")){
                 try{
-                    String token = authorizartionHeader.substring("Bearer ".length());
-                    Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-                    JWTVerifier verifier = JWT.require(algorithm).build();
-                    DecodedJWT decodedJWT = verifier.verify(token);
-                    String username = decodedJWT.getSubject();
-                    String roles[] = decodedJWT.getClaim("roles").asArray(String.class);
+                    AuthUserInfo authUserInfo = SecurityUtil.getAuthHeaderDetails(authorizartionHeader);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                    for (String role:roles){
+                    for (String role:authUserInfo.getRoles()){
                         authorities.add(new SimpleGrantedAuthority(role));
                     }
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,null,authorities);
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(authUserInfo.getUserName(),null,authorities);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     filterChain.doFilter(request,response);
                 }catch (Exception e){

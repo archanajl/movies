@@ -89,9 +89,9 @@ We also created the trello account and added our team to it.
 
 We designed the database structure and UML class design.
 
-Please Click [here](https://github.com/archanajl/movies/blob/feature-to-searchMovies-and-getUser/docs/Postgres_Table_Design.jpeg) to view the database design
+Please Click [here](https://github.com/archanajl/movies/blob/master/docs/Postgres_Table_Design.jpeg) to view the database design
 
-Please Click [here](https://github.com/archanajl/movies/blob/feature-to-searchMovies-and-getUser/docs/Movies-UML-Design.jpeg) to view the UML design
+Please Click [here](https://github.com/archanajl/movies/blob/master/docs/Movies-UML-Design.jpeg) to view the UML design
 
 We created the project structure.
 
@@ -142,7 +142,7 @@ Please click [here](https://htmlpreview.github.io/?https://github.com/archanajl/
 
 ### <ins> To improve </ins>
 
-- Improve the sceurity
+- Improve the security
 
 - Not expose the password for the user details
 
@@ -151,6 +151,7 @@ Please click [here](https://htmlpreview.github.io/?https://github.com/archanajl/
 Please click [here](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Test%20Results%20-%20MoviesAPI.html) to see the test results.
 
 We also tested the application endpoints using postman.
+
 We included three collections for aws, docker (local) and local. click below to view the respective ones.
 
 - [aws](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20aws.postman_collection.json)
@@ -158,6 +159,10 @@ We included three collections for aws, docker (local) and local. click below to 
 - [docker](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20docker.postman_collection.json)
 
 - [local](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Movies%20API%20-%20local.postman_collection.json)
+
+### <ins> Docker & AWS </ins>
+ 
+The docker instructions can be found [here](https://github.com/archanajl/movies/blob/master/docs/DockerInfo.txt) 
 
 ### <ins>Technologies Used</ins>
 

@@ -1,0 +1,34 @@
+Steps to be followed for Docker
+
+
+
+Docker local:
+
+1. Add docker folder.
+2. Add Dockerfile and docker-compose.yml to docker folder
+3. Have application-prod.properties profile and point to it(not mandatory but good practice)
+4. Run mvn package -Dskiptests through terminal at movies folder
+5. Copy the .jar file from target to cd docker
+6. Now cd docker in the terminal
+7. Run docker-compose down (if it is not the first time)
+8. Run docker-compose up
+9. Now you should be able to access
+    1. localhost:8080/users/
+    2. http://localhost:8080/swagger-ui/index.html#/user-controller
+10. To get the data in , run this command from the folder of the backup sql
+    1. docker exec -i -u postgres dbapp pg_restore -C -d postgres < movies_backup.sql
+
+
+
+In AWS:
+
+1. Add Docker file to movies folder
+2. Run mvn package through terminal at movies folder
+3. Zip the contents of movies folder. Important point to note, don’t zip movies folder. Instead zip the contents of movies folder
+4. Now login in to AWS console.
+5. Open Elastic Beanstalk. -> Create Application
+6. Enter application name - moviesAPI (any name)
+7. Choose a platform - Docker
+8. Choose Upload code and map it to ur local Archive.zip
+9. Create environment
+10. The URL is created.

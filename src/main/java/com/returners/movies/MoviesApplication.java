@@ -1,18 +1,14 @@
 package com.returners.movies;
 
-import com.returners.movies.model.Role;
-import com.returners.movies.service.RoleService;
-import com.twilio.Twilio;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springdoc.core.GroupedOpenApi;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @SpringBootApplication
 public class MoviesApplication {
@@ -45,20 +41,6 @@ public class MoviesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MoviesApplication.class, args);
-	}
-
-	@Bean
-	CommandLineRunner run (RoleService roleService){
-		return args ->{
-//		    roleService.addRole(new Role(null,"VIEWER"));
-//			roleService.addRole(new Role(null,"MANAGER"));
-//			roleService.addRole(new Role(null,"ADMIN"));
-
-//			roleService.addRoleToUser(1L,1L);
-//			roleService.addRoleToUser(1L,2L);
-//			roleService.addRoleToUser(2L,1L);
-//			roleService.addRoleToUser(3L,3L);
-		};
 	}
 
 }

@@ -5,7 +5,6 @@ import com.returners.movies.model.DataResponse;
 import com.returners.movies.model.User;
 import com.returners.movies.constants.Constants;
 import com.returners.movies.exception.NoSuchUserExistsException;
-import com.returners.movies.model.User;
 import com.returners.movies.service.UserService;
 import com.returners.movies.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
