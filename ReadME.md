@@ -48,6 +48,7 @@ Movies API will have two types of users:
 Assumptions:
 
 Any user can view the movie recommendations. No authorization checks done.
+ - removed in extension. Users now have to authenticated and authorized to view movie recommendations
 
 ### <ins>Key Features of the application</ins>
 
@@ -130,11 +131,11 @@ Used Twilio API to send sms and email to the registered users.
 
 Please click [here](https://htmlpreview.github.io/?https://github.com/archanajl/movies/blob/master/docs/Email.png) to view a sample email format.
 
-### <ins>Extension after project submission </ins>
+### <ins>Extension after project submission (My contribution)</ins>
 
 - Include a favorite module so that the users can save their favourite movies.
 
-- Added roles to users
+- Added roles to users ( ADMIN, VIEWER, MANAGER)
 
 - Authentication of the users to access the API endpoint
 

@@ -1,24 +1,14 @@
 package com.returners.movies.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.returners.movies.constants.Constants;
-import com.returners.movies.controller.UserController;
 import com.returners.movies.exception.UserAlreadyExistsException;
 import com.returners.movies.model.User;
 import com.returners.movies.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +23,9 @@ public class UserServiceTest {
 
     @InjectMocks
     private UserServiceImpl userService;
+
+    @Mock
+    BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void setUp() {

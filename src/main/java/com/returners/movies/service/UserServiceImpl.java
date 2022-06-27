@@ -2,9 +2,7 @@ package com.returners.movies.service;
 
 import com.returners.movies.constants.Constants;
 import com.returners.movies.exception.UserAlreadyExistsException;
-import com.returners.movies.model.Movie;
 import com.returners.movies.model.User;
-import com.returners.movies.repository.MovieRepository;
 import com.returners.movies.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,9 +24,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    MovieRepository movieRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
